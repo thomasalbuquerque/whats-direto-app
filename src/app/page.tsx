@@ -15,6 +15,7 @@ const countryCodeAndCalling = countriesData.customList(
 interface CountryOption {
   value: string;
   label: any;
+  countryCode: string;
 }
 
 let options: CountryOption[];
@@ -53,10 +54,14 @@ options = array2.map((country) => ({
       country.countryCode
     }`}</div>
   ),
+  countryCode: country.countryCode,
 }));
 
+const defaultInitialCountry = options.filter((o) => o.countryCode === `BR`);
+
 export default function Home() {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptionCountryCode, setSelectedOptionCountryCode] =
+    useState('BR');
   useEffect(() => {
     console.log('array2');
     console.log(array2);
@@ -79,7 +84,7 @@ export default function Home() {
       <Select
         options={options}
         className="country-selector"
-        defaultValue={selectedOption}
+        defaultValue={defaultInitialCountry}
       />
     </main>
   );
